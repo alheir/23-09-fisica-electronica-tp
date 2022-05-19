@@ -1,4 +1,4 @@
-# Diodo - 1N4148
+# 1N4148 - Diodo
 
 * q-point.txt
   * Info del punto de operación

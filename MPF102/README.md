@@ -1,4 +1,4 @@
-# JFET N - MPF102
+# MPF102 - JFET N
 
 * q-point.txt
   * Info del punto de operación

@@ -5,3 +5,8 @@ V(n001):	 5	 voltage
 I(D1):	 0.000432386	 device_current
 I(R1):	 -0.000432386	 device_current
 I(V1):	 -0.000432386	 device_current
+
+VDQ = 546.424mV
+IDQ = 432.386uA
+
+Slope: 0.00949241 Siemens == !!!105.347 Omhs!!!

@@ -9,3 +9,11 @@ Is(M1):	 -0.00138696	 device_current
 I(R1):	 0.00138696	 device_current
 I(V2):	 -0.00138696	 device_current
 I(V1):	 0	 device_current
+
+IDQ = 1.386mA
+VDSQ = 2.649V
+VGSQ = 1.696V
+gm (slope entrada): 0.015076 Siemens == !!!15.076 mA/V (o mS)!!!
+ro (slope salida): 0 Siemens == !!!infinito Omhs!!!
+    (analizar?)
+

@@ -1,7 +1,1 @@
-*
-* MPF102 N−Channel JFET
-*
-* From http://www.gunthard-kraus.de/Spice_Model_CD/Vendor%20List/Spice-Models-collection/jfet.lib
-*
-.model MPF102   NJF(Vto=-3.41 Beta=1.04m Lambda=2m Rd=1 Rs=1 Cgs=2.414p
-+                   Cgd=1.6p Pb=1 Is=33.57f Kf=11.73E-18 Af=1 Fc=.5)
+.model MPF102	NJF(Beta=1.04m Betatce=-.5 Rd=1 Rs=1 Lambda=2m Vto=-2.9 Vtotc=-2.5m Is=33.57f Isr=322.4f N=1 Nr=2 Xti=3 Alpha=311.7u Vk=243.6 Cgd=1.6p M=.3622 Pb=1 Fc=.5 Cgs=2.414p Kf=11.73E-18 Af=1)

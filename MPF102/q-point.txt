@@ -1,12 +1,20 @@
        --- Operating Point ---
 
-V(ds):	 2.16105	 voltage
+V(ds):	 4.54307	 voltage
 V(gs):	 -0.68	 voltage
 V(n001):	 10	 voltage
-Id(J1):	 0.00739523	 device_current
-Ig(J1):	 -3.58819e-012	 device_current
-Is(J1):	 -0.00739523	 device_current
-I(R1):	 0.00739523	 device_current
-I(V1):	 3.58819e-012	 device_current
-I(V2):	 -0.00739523	 device_current
+Id(J1):	 0.00514804	 device_current
+Ig(J1):	 -6.98479e-012	 device_current
+Is(J1):	 -0.00514804	 device_current
+I(R1):	 0.00514804	 device_current
+I(V1):	 6.98479e-012	 device_current
+I(V2):	 -0.00514804	 device_current
+
+IDQ = 5.148mA
+VDSQ = 4.543V
+VGSQ = -680mV
+gm (slope entrada): 0.00462733 Siemens == !!!4.627 mA/V (o mS!!!
+ro (slope salida): 1.01571e-005 Siemens == !!!98.453 kOhms!!!
+
+
 

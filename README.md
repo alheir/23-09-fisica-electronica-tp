@@ -9,3 +9,12 @@ Trabajo práctico de simulación de dispositivos basados en semiconductores a tr
 * N-Channel JFET: MPF102
 * N-Channel Enhancement MOSFET: NDS7002
 * N-Channel Depletion MOSFET: LND250
+
+----------
+
+Integrantes:
+
+* ALVAREZ, Matías Ezequiel
+* HEIR, Alejandro Nahuel
+
+23.09 - Física Electrónica ~ Ingeniería Electrónica ~ Instituto Tecnológico Buenos Aires ~ 2022

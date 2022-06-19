@@ -1,0 +1,92 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+                    % Axis names:
+                    xlabel=$V_{DS}\, (V)$, 
+                    ylabel=$I_D\,(mA)$,
+                    ymax = 2.5,
+                    xmax = 2.5,
+                    axis lines = center,
+                    axis y line*=center,
+                    ytick={0.5,1,1.5},
+                    extra y ticks={2},
+                    extra y tick labels={$2$},    
+                    extra y tick style={y tick label style={right,     xshift=0.25em}},
+                    label style={font=\scriptsize},
+                    tick label style={font=\scriptsize},
+                    xlabel style={color = ForestGreen},
+                    width=0.9\columnwidth
+                ]
+                
+                \node[color=blue] at (-1.1,0.11) {\scriptsize $V_{GS}(V)$};
+                
+                \addplot[
+                    % Plot color:
+                    color = blue, thick,
+                    % Select axis rows:
+                    select coords between index={1}{501},
+                    filter discard warning=false, unbounded coords=discard
+                    ]
+                    % Table Path and axis' columns (0 - N):
+                    table [x index=1, y expr = 1000*\thisrowno{2}] {src/MOSFETd-EntryPlot.txt};
+                % \addlegendentry{\text{\scriptsize Entrada ($I_D$ vs $V_{GS}$}\scriptsize )}
+                
+                % Mark one point:
+                \filldraw [red] 
+                        (-0.6, 1.25)
+                        circle (2pt)
+                        node[anchor = east, color = black]{\scriptsize Q};
+                        
+                \addplot[
+                    % Plot color:
+                    color = ForestGreen, thick,
+                    % Select axis rows:
+                    select coords between index={1}{501},
+                    filter discard warning=false, unbounded coords=discard
+                    ] 
+                    % Table Path and axis' columns (0 - N):
+                    table [x index=1, y expr = 1000*\thisrowno{2}] {src/MOSFETd-ExitPlot.txt};
+                \node[text=ForestGreen] at (1.85,1.37) {\scriptsize $V_{GS} = 600\,mV$};
+                % \addlegendentry{\text{\scriptsize Salida ($I_D$ vs $V_{DS}$}\scriptsize )}
+                    
+                \addplot[
+                    color = gray,
+                    select coords between index={1}{501}
+                    ] 
+                    table [x index = 1, y expr = 1000*\thisrowno{2}] {src/MOSFETd-ExitPlotLower.txt};
+                \node[text=gray] at (1.85,0.925) {\scriptsize $V_{GS} = 900\,mV$};
+                
+                \addplot[
+                    color = gray,
+                    select coords between index={1}{501}
+                    ] 
+                    table [x index = 1, y expr = 1000*\thisrowno{2}] {src/MOSFETd-ExitPlotUpper.txt};
+                \node[text=gray] at (1.85,1.85) {\scriptsize $V_{GS} = 300\,mV$};
+                    
+                % Mark one point:
+                \filldraw [red] 
+                        (1.25, 1.25) 
+                        circle (2pt)
+                        node[anchor = north west, color = black]{\scriptsize Q};
+        \end{axis}
+        % axis lines = center,
+        %         axis x line*=top,
+        % \begin{axis}[
+        %             xlabel=$V_{DS}$, ylabel=$V_{GS}$, 
+        %                 axis y line*=right,
+        %         ]
+        %         \addplot[color=red, dashed, tiny,
+        %             select coords between index={1}{2000},
+        %             filter discard warning=false, unbounded coords=discard
+        %             ] table [x index=1, y index=2]{plot.txt};
+        % \end{axis}
+    \end{tikzpicture}
+    \caption{Curvas características MOSFET(depletion) - N: LND250.}
+    \label{fig:MOSFETd-Plot}
+\end{figure}
+\end{document}

@@ -1,0 +1,70 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+                xlabel = {$f\,(Hz)$},
+                ylabel = {$(dB)$},
+                axis y line*=left,
+                xmode=log,
+                xmajorgrids=true,
+                grid style=dashed,
+                label style={font=\scriptsize},
+                tick label style={font=\scriptsize},
+                width=0.9\columnwidth,
+                legend cell align=left,
+            ]
+            \addplot[
+                    color = blue, thick,
+                    select coords between index={1}{801}
+                    ] 
+                    table [x index = 0, y index = 1]{src/1n4148-bode.txt};
+            \addlegendentry{\scriptsize $V_D$}
+            
+            \addplot[
+                    color = ForestGreen, thick,
+                    select coords between index={1}{801}
+                    ] 
+                    table [x index = 0, y index = 3]{src/1n4148-bode.txt};
+            \addlegendentry{\scriptsize $I_D$}
+            
+    \end{axis}
+    \begin{axis}[
+                ylabel = {Fase $(^\circ)$},
+                xmode=log,
+                ytick={-90,-45,0,45,90},
+                axis y line*=right,
+                xticklabels=\empty,
+                xmajorticks=false,
+                label style={font=\scriptsize},
+                tick label style={font=\scriptsize},
+                width=0.9\columnwidth,
+                legend style={at={(0.04,0.3)},anchor=west},
+                legend cell align=left,
+            ]
+            
+            \addplot[
+                    color = blue, thick, dashed,
+                    select coords between index={1}{801}
+                    ] 
+                    table [x index = 0, y index = 2]{src/1n4148-bode.txt};
+            \addlegendentry{\scriptsize Fase $V_D$}
+            
+            \addplot[
+                    color = ForestGreen, thick, dashed,
+                    select coords between index={1}{801}
+                    ] 
+                    table [x index = 0, y index = 4]{src/1n4148-bode.txt};
+            \addlegendentry{\scriptsize Fase $I_D$}
+            
+            
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Respuesta en frecuencia del diodo 1N4148.}
+    \label{fig:1n4148-plot-bode}
+\end{figure}
+\end{document}
+

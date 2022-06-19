@@ -1,0 +1,76 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+                    % Axis names:
+                    xlabel=$t\,(ms)$, 
+                    ylabel=$I_C\,(\mu A)$,
+                    xmajorgrids=true,
+                    ymajorgrids=true,
+                    grid style = dashed,
+                    ymax = 550, ymin = 75,
+                    extra y ticks={268.07},
+                    extra y tick labels={$I_{C_Q}$},
+                    axis lines = center,
+                    axis y line*=left,
+                    width=\columnwidth,
+                    label style={font=\scriptsize},
+                    width=0.9\columnwidth
+                ]
+                \addplot[
+                    % Plot color:
+                    color = blue, thick,
+                    % Select axis rows:
+                    select coords between index={1}{38},
+                    filter discard warning=false, unbounded coords=discard
+                    ]
+                    % Table Path and axis' columns (0 - N):
+                    table [x expr = \thisrowno{0} * 1e3, y expr = (1e6)*\thisrowno{4}] {src/BJT-AC.txt};
+                \addlegendentry{\text{\scriptsize $5\,mV$}}
+                        
+                \addplot[
+                    % Plot color:
+                    color = ForestGreen, thick,
+                    % Select axis rows:
+                    select coords between index={40}{100},
+                    filter discard warning=false, unbounded coords=discard
+                    ] 
+                    % Table Path and axis' columns (0 - N):
+                    table [x expr = \thisrowno{0} * 1e3, y expr=(1e6)*\thisrowno{4}] {src/BJT-AC.txt};
+                \addlegendentry{\text{\scriptsize $10\,mV$}}
+                    
+                \addplot[
+                    color = Maroon, thick,
+                    select coords between index={102}{194}
+                    ] 
+                    table [x expr = \thisrowno{0} * 1e3, y expr=(1e6)*\thisrowno{4}] {src/BJT-AC.txt};
+                \addlegendentry{\text{\scriptsize $15\,mV$}}
+                
+                \addplot[
+                    color = YellowOrange, thick,
+                    select coords between index={196}{318}
+                    ] 
+                    table [x expr = \thisrowno{0} * 1e3, y expr=(1e6)*\thisrowno{4}] {src/BJT-AC.txt};
+                \addlegendentry{\text{\scriptsize $20\,mV$}}
+                    
+        \end{axis}
+        % axis lines = center,
+        %         axis x line*=top,
+        % \begin{axis}[
+        %             xlabel=$V_{DS}$, ylabel=$V_{GS}$, 
+        %                 axis y line*=right,
+        %         ]
+        %         \addplot[color=red, dashed, tiny,
+        %             select coords between index={1}{2000},
+        %             filter discard warning=false, unbounded coords=discard
+        %             ] table [x index=1, y index=2]{plot.txt};
+        % \end{axis}
+    \end{tikzpicture}
+    \caption{Curvas de salida del BJT para distintas señales.}
+    \label{fig:BJT-AC}
+\end{figure}
+\end{document}

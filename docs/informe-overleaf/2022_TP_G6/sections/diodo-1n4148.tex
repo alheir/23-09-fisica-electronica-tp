@@ -1,0 +1,34 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+El circuito para analizar al dispositivo consiste en una fuente de $5\,V_{DC}$, en serie con una resistencia de $10k\Omega$ y el diodo en cuestión. Simulando, se obtuvo el siguiente punto de trabajo: $Q = (V_{D_Q}=0.546V;\, I_{D_Q}=0.432mA)$.
+
+\subsection{Curva característica}
+
+En la figura \ref{fig:1n4148-plot-iv} se muestra la curva característica del diodo, indicando la ubicación del punto Q para el circuito ensayado. El dispositivo está operando en la región de polarización directa y alejado de condiciones destructivas, siendo $I_{D_Q} << I_{D_{max}} = 300mA$ \cite{1n4148}. Se observa que la corriente comienza a aumentar exponencialmente con la tensión que cae sobre el diodo, siendo coherente así con la \emph{ecuación de Shockley}, que modela dicha corriente en polarización directa.
+
+\subfile{../Plots/1n4148-plot-iv}
+
+\subsection{Parámetros del modelo de pequeña señal}
+
+Como parámetro característico del diodo en pequeña señal, se tiene $r_d$, (resistencia dinámica), que representa la relación entre variaciones de tensión y variaciones de corriente en el diodo en un entorno del punto Q, calculándose entonces como $\nicefrac{\partial V_D}{\partial I_D}$ para los valores Q. Tomando la derivada gráficamente en la simulación, resulta $r_d = 105.35\Omega$. Este valor es contrastable con la resistencia estática del diodo $r_e$, la cual sería igual a la dinámica en caso de que el diodo tenga un comportamiento lineal. En este caso, $r_e = \nicefrac{V_{D_Q}}{I_{D_Q}} = 1263.89\Omega$, es un orden de magnitud mayor a la dinámica. 
+
+\subsection{Análisis en frecuencia}
+Para analizar el dispositivo en frecuencia, se partió del mismo circuito considerado para los ensayos previos, pero excitando al sistema con una senoidal de $5\,V_{pp}$ en un rango de frecuencias que alcanza $1\,GHz$.
+
+\subfile{../Plots/1n4148-plot-v-freq}
+
+En la figuras \ref{fig:1n4148-plot-v-freq} y \ref{fig:1n4148-plot-i-freq} se muestra la capacidad de rectificación de tensión y corriente, respectivamente, del diodo a diferentes frecuencias. Si bien las respuestas son similares (cae el \emph{forward voltage} y siempre admite la misma corriente) cuando el diodo queda polarizado en directa, se observan claras diferencias cuando la juntura queda inversamente polarizada. A partir de frecuencias de $1\,MHz$ la juntura inversa pierde sus cualidades de barrera a bajas frecuencias, dejando pasar corrientes mayores a la de saturación inversa. 
+
+Estos efectos se deben a la capacidad que representa la juntura PN inversa. Empíricamente, a partir de las figuras, se observa cómo este capacitor, a mayor frecuencia, presenta una menor tensión (\ref{fig:1n4148-plot-v-freq}); o, visto de otra forma, el capacitor no llega a cargarse en un semiciclo y sigue demandando corriente (\eqref{fig:1n4148-plot-i-freq}).
+
+\subfile{../Plots/1n4148-plot-i-freq}
+
+Este claro efecto capacitivo se evidencia en el diagrama de Bode (figura \ref{fig:1n4148-plot-bode}). A altas frecuencias, la corriente en el diodo queda adelantada $90^\circ$ respecto de la tensión, por lo que se puede interpretar un efecto de reactancia capacitiva. Además, la atenuación de tensión a altas frecuencias aumenta junto a la ganancia en corriente, en concordancia con las figuras \ref{fig:1n4148-plot-v-freq} y \ref{fig:1n4148-plot-i-freq}.
+
+\subfile{../Plots/1n4148-plot-bode}
+
+En conclusión, en altas frecuencias (a partir de $1\,MHz$) el diodo comienza a comportarse como un conductor, con caídas de tensión cada vez menores, y con menor impedancia a la corriente a causa de la capacidad de juntura inversa.
+\end{document}
+
+% Esto es coherente con la capacidad que representa la juntura inversa, la cual viene especificada como $C_T = 4pF$ a $0V$ en juntura, decreciendo a mayores tensiones inversas \cite{1n4148}.

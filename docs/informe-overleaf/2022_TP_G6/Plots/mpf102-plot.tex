@@ -1,0 +1,76 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+                % ymajorgrids=true,
+                % xmajorgrids=true,
+                grid style=dashed,
+                xmax=8.5, ymax = 9.5,
+                axis lines = center,
+                ytick={2,4,8},
+                xtick={-3,-1.5,2,4,6,8},
+                extra y ticks={6},
+                extra y tick labels={$6$},    
+                extra y tick style={y tick label style={right, xshift=0.25em}},
+                xlabel=$V_{DS}(V)$,
+                ylabel=$I_D(mA)$, 
+                label style={font=\scriptsize},
+                tick label style={font=\scriptsize},
+                xlabel style={color = ForestGreen},
+                width=0.9\columnwidth
+            ]
+            \node[color=blue] at (-1.20,0.45) {\scriptsize $V_{GS}(V)$};
+            
+            \addplot[
+                    color = blue, thick,
+                    select coords between index={1}{3001}
+                    ] 
+                    table [x index=0, y expr = 1000 * \thisrow{Id(J1)}]{src/mpf102-entry.txt};
+        
+            \addplot[
+                    color = gray,
+                    select coords between index={2010}{4000}
+                    ] 
+                    table [x index=1, y expr = 1000 * \thisrow{Id(J1)}]{src/mpf102-exit.txt};
+            \node[text=gray] at (6.5,1.2) {\tiny $V_{GS} = -2V$};
+                    
+            \addplot[
+                    color = gray,
+                    select coords between index={4010}{6000}
+                    ] 
+                    table [x index=1, y expr = 1000 * \thisrow{Id(J1)}]{src/mpf102-exit.txt};
+            \node[text=gray] at (6.5,3.2) {\tiny $V_{GS} = -1.25V$};
+            
+                    
+            \addplot[
+                    color = ForestGreen, thick,
+                    select coords between index={6010}{8000}
+                    ] 
+                    table [x index=1, y expr = 1000 * \thisrow{Id(J1)}]{src/mpf102-exit.txt};
+            \node[text=ForestGreen] at (6.5,5.5) {\tiny $V_{GS} = -0.68V$};
+                
+            \addplot[
+                    color = gray,
+                    select coords between index={8010}{10000}
+                    ] 
+                    table [x index=1, y expr = 1000 * \thisrow{Id(J1)}]{src/mpf102-exit.txt};
+            \node[text=gray] at (6.5,8.4) {\tiny $V_{GS} = 0V$};
+                    
+            \filldraw [red] 
+                    (4.54307, 5.14804) 
+                    circle (2pt)
+                    node[anchor = north, color = black]{\scriptsize Q};
+            \filldraw [red] 
+                    (-0.68, 5.14804) 
+                    circle (2pt)
+                    node[anchor = east, color = black]{\scriptsize Q};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Curvas características JFET-N MPF-102.}
+    \label{fig:mpf102-plot}
+\end{figure}
+\end{document}

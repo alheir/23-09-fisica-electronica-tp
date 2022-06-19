@@ -1,0 +1,77 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+                ymajorgrids=true,
+                % xmajorgrids=true,
+                % ymax=5,ymin=-5,
+                grid style=dashed,
+                % axis lines = center,
+                xlabel={Período normalizado},
+                ylabel=$V_D\,(V)$, 
+                ytick={-5,-4,-3,-2,-1,0,5},
+                % label style={font=\scriptsize},
+                % tick label style={font=\scriptsize},
+                legend style={legend pos=north east,font=\tiny},
+                legend cell align=left,
+                label style={font=\scriptsize},
+                tick label style={font=\scriptsize},
+                width=0.9\columnwidth,
+            ]
+            % \node[color=blue] at (-1.20,0.45) {\scriptsize $V_{GS}(V)$};
+            
+            \addplot[
+                    color = black, dashed,
+                    select coords between index={1}{141}
+                    ] 
+                    table [x expr = \thisrow{time}*(1e4), y index = 2]{src/1n4148-at-10k.txt};
+            \addlegendentry{Excitación}
+                    
+            \addplot[
+                    color = blue, thick,
+                    select coords between index={1}{141}
+                    ] 
+                    table [x expr = \thisrow{time}*(1e4), y index = 1]{src/1n4148-at-10k.txt};
+            \addplot[
+                    color = Orchid, thick,
+                    select coords between index={1}{141}
+                    ] 
+                    table [x expr = \thisrow{time}*(1e5), y index = 1]{src/1n4148-at-100k.txt};
+            \addplot[
+                    color = Goldenrod, thick,
+                    select coords between index={1}{141}
+                    ] 
+                    table [x expr = \thisrow{time}*(1e6), y index = 1]{src/1n4148-at-1Meg.txt};
+            \addplot[
+                    color = ForestGreen, thick,
+                    select coords between index={1}{233}
+                    ] 
+                    table [x expr = \thisrow{time}*(5e6), y index = 1]{src/1n4148-at-5Meg.txt};
+             \addplot[
+                    color = Apricot, thick,
+                    select coords between index={1}{141}
+                    ] 
+                    table [x expr = \thisrow{time}*(1e7), y index = 1]{src/1n4148-at-10Meg.txt};
+             \addplot[
+                    color = gray, thick,
+                    select coords between index={1}{141}
+                    ] 
+                    table [x expr = \thisrow{time}*(1e8), y index = 1]{src/1n4148-at-100Meg.txt};
+                    
+            \addlegendentry{@10kHz}
+            \addlegendentry{@100kHz}
+            \addlegendentry{@1MHz}
+            \addlegendentry{@5MHz}
+            \addlegendentry{@10MHz}
+            \addlegendentry{@100MHz}
+        
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Rectificación de tensión del 1N4148 a distintas frecuencias.}
+    \label{fig:1n4148-plot-v-freq}
+\end{figure}
+\end{document}

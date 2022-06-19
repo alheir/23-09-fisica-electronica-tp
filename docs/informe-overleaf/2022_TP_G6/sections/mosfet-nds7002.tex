@@ -1,0 +1,20 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+El circuito para analizar al dispositivo consiste en una resistencia de drain $R = 5300\Omega$, una fuente de entrada $V_{in} = 1.696V$ y una fuente de salida $V_{CC} = 10V$. Simulando, se obtuvo el siguiente punto de trabajo: $Q = (V_{GS_Q} = 1.696V;\, V_{DS_Q}=2.649V;\, I_{DS_Q}=1.386mA)$.
+
+\subsection{Curvas de entrada y salida}
+
+En la figura \ref{fig:nds7002-plot} se tienen las curvas de entrada y salida simuladas con el punto Q indicado, resultando estar el transistor en la zona de saturación. Empíricamente, se ubicó el valor \emph{threshold} de gate entre $1.2V$ y $1.6V$, estando dentro del rango especificado por el fabricante \cite{nds7002}, $1V$ y $2.5V$.
+
+\subfile{../Plots/nds7002-plot}
+% \subfile{../Plots/nds7002-plot-detailExit}
+
+\subsection{Parámetros del modelo de pequeña señal}
+
+Para el modelo de pequeña señal, se calculan la conductancia de entrada $g_m$ y la resistencia de salida $r_o$ a partir de la simulación. Resultaron $g_m = 15.076\, \nicefrac{mA}{V}$ y $r_0 \rightarrow \infty$. Este llamativo valor de $r_0$ se interpreta en el gráfico como una recta totalmente horizontal, dejando ver que la simulación no tiene en cuenta el efecto Early, que causaría cierta pendiente positiva en las curvas de salida.
+
+La $g_m$ especificada por el fabricante ($g_{FS}$) está en el rango de $80\,mS$ a $320\,mS$ \cite{nds7002}, siendo mucho mayor a la calculada. Los fabricantes suelen especificar este parámetro para valores de $V_{GS}$ que permitan la mitad de $I_{D_{max}}$ y para valores de $V_{DS}$ que aseguren la saturación \cite{infineon-note}. Para el dispositivo en cuestión, se menciona una $I_D$ de prueba de $200\,mA$, estando esta situación alejada de la simulada. Para dicha corriente, es esperable que la curva de entrada tenga una pendiente mayor, lo cual explica la diferencia entre la transconductancia del fabricante y la ensayada.
+\end{document}
+
+

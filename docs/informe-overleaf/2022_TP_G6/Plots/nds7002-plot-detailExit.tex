@@ -1,0 +1,37 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+                ymajorgrids=true,
+                xmajorgrids=true,
+                grid style=dashed,
+                ymax = 3,
+                axis lines = left,
+                xlabel=$V_{DS}(V)$,
+                ylabel=$I_D(mA)$, 
+                label style={font=\scriptsize},
+                tick label style={font=\scriptsize},
+                xmode = log, ymode = log,
+            ]
+            % \node[] at (-1.20,0.45) {\scriptsize $V_{GS}(V)$};
+            
+            \addplot[
+                    color = ForestGreen, thick,
+                    select coords between index={3}{200}
+                    ] 
+                    table [x index=1, y expr = 1000 * \thisrow{I(R1)}]{src/nds7002-detailExit.txt};
+
+            \filldraw [red] 
+                    (2.64911, 1.3869) 
+                    circle (2pt)
+                    node[anchor = north west, color = black]{\scriptsize Q};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Curva de salida detallada MOSFET-N-enrich NDS7002.}
+    \label{fig:nds7002-plot-detailedExit}
+\end{figure}
+\end{document}

@@ -1,0 +1,84 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+                    % Axis names:
+                    xlabel=$V$, 
+                    ylabel=$I_C\,(mA)$, 
+                    ymax = 0.6, ymin = 0,
+                    xmax = 0.7, xmin = 0,
+                    axis lines = center,
+                    axis y line*=left,
+                    width=\columnwidth,
+                    label style={font=\scriptsize},
+                    width=0.9\columnwidth
+                ]
+                \addplot[
+                    % Plot color:
+                    color = blue, thick,
+                    % Select axis rows:
+                    select coords between index={1}{141},
+                    filter discard warning=false, unbounded coords=discard
+                    ]
+                    % Table Path and axis' columns (0 - N):
+                    table [x index=1, y expr = 1000*\thisrowno{2}] {src/BJT-EntryPlot.txt};
+                \addlegendentry{\text{\scriptsize Entrada ($I_C$ vs $V_{BE}$})}
+                
+                % Mark one point:
+                \filldraw [red] 
+                        (6.02e-01, 2.16e-01)
+                        circle (2pt)
+                        node[anchor = north west, color = black]{\scriptsize Q};
+                        
+                \addplot[
+                    % Plot color:
+                    color = ForestGreen, thick,
+                    % Select axis rows:
+                    select coords between index={1}{141},
+                    filter discard warning=false, unbounded coords=discard
+                    ] 
+                    % Table Path and axis' columns (0 - N):
+                    table [x index=1, y expr=1000*\thisrowno{2}] {src/BJT-ExitPlot.txt};
+                \node[text=ForestGreen] at (0.35,0.285) {\scriptsize $V_{in} = 603.6\,mV$};
+                \addlegendentry{\text{\scriptsize Salida ($I_C$ vs $V_{CE}$}\scriptsize )}
+                    
+                \addplot[
+                    color = gray,
+                    select coords between index={1}{141}
+                    ] 
+                    table [x index = 1, y expr = 1000 * \thisrowno{2}]{src/BJT-ExitPlotLower.txt};
+                \node[text=gray] at (0.35,0.13) {\scriptsize $V_{in} = 580\,mV$};
+                
+                \addplot[
+                    color = gray,
+                    select coords between index={1}{141}
+                    ] 
+                    table [x index = 1, y expr = 1000 * \thisrowno{2}]{src/BJT-ExitPlotUpper.txt};
+                \node[text=gray] at (0.35,0.43) {\scriptsize $V_{in} = 615\,mV$};
+                    
+                % Mark one point:
+                \filldraw [red] 
+                        (5.98e-02, 2.16e-01) 
+                        circle (2pt)
+                        node[anchor = north west, color = black]{\scriptsize Q};
+        \end{axis}
+        % axis lines = center,
+        %         axis x line*=top,
+        % \begin{axis}[
+        %             xlabel=$V_{DS}$, ylabel=$V_{GS}$, 
+        %                 axis y line*=right,
+        %         ]
+        %         \addplot[color=red, dashed, tiny,
+        %             select coords between index={1}{2000},
+        %             filter discard warning=false, unbounded coords=discard
+        %             ] table [x index=1, y index=2]{plot.txt};
+        % \end{axis}
+    \end{tikzpicture}
+    \caption{Curvas características BJT - NPN: BC547.}
+    \label{fig:BJT-Plot}
+\end{figure}
+\end{document}

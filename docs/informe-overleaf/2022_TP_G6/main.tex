@@ -1,0 +1,103 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage{pgfplots}\pgfplotsset{compat=1.17}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage{hyperref}
+\usepackage{csquotes}
+\usepackage{nicefrac}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\pgfplotsset{select coords between index/.style 2 args={
+    x filter/.code={
+        \ifnum\coordindex<#1\def\pgfmathresult{}\fi
+        \ifnum\coordindex>#2\def\pgfmathresult{}\fi
+    }
+}}
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor si-mulando}
+
+\usepackage{subfiles}
+
+\setlength{\textfloatsep}{5pt}
+
+\begin{document}
+
+\title{Análisis de Transistores. El Diodo en Frecuencia.}
+\author{
+\IEEEauthorblockN{Alejandro Nahuel Heir}
+\IEEEauthorblockA{  Instituto Tecnológico de Buenos Aires\\
+                    Buenos Aires, Argentina\\
+                    aheir@itba.edu.ar}
+\and
+\IEEEauthorblockN{Matías Ezequiel Alvarez}
+\IEEEauthorblockA{  Instituto Tecnológico de Buenos Aires\\
+                    Buenos Aires, Argentina\\
+                    matalvarez@itba.edu.ar}
+}
+
+\maketitle
+
+\begin{abstract}
+Es común en ámbitos ingenieriles utilizar modelos idealizados de diversos componentes electrónicos para simplificar cálculos y predicciones analíticas. En este trabajo se comparan los resultados teóricos con los obtenidos a partir de simulaciones en el software \emph{LTSpice} de distintos dispositivos semiconductores: diodo, BJT, JFET y MOSFET. Adicionalmente se evalúan polarizaciones y modelos de pequeña señal, profundizando en el del BJT y en el rango operativo de frecuencia del diodo.
+\end{abstract}
+
+\begin{IEEEkeywords}
+diodo, transistor, BJT, JFET, MOSFET, punto Q, curva característica, pequeña señal.
+\end{IEEEkeywords}
+
+\section{Introducción}
+\subfile{sections/intro}
+
+\section{Diodo: 1N4148}
+\subfile{sections/diodo-1n4148}
+
+\section{NPN BJT: BC547}
+\subfile{sections/bjt-bc547}
+
+\section{N-Channel JFET: MPF102}
+\subfile{sections/jfet-mpf102}
+
+\section{N-Channel Enhancement
+Mode MOSFET: NDS7002}
+\subfile{sections/mosfet-nds7002}
+
+\section{N-Channel Depletion Mode MOSFET: LND250}
+\subfile{sections/mosfet-lnd250}
+
+\section{Conclusión}
+\subfile{sections/conclusion}
+
+\begin{thebibliography}{1}
+
+\bibitem{1n4148}
+ON Semiconductor, \textquote{Small Signal Diode - 1N91x, 1N4x48, FDLL914, FDLL4x48}, 1N914/D, 2002 [Revised Aug. 2021].
+
+\bibitem{bc547b}
+NXP Semiconductors, \textquote{BC847-BC547 series
+45 V, 100 mA NPN general-purpose transistors}, BC847\_BC547\_SER\_7, 2008 [Revised Dec. 2008].
+
+\bibitem{mpf102}
+ON Semiconductor, \textquote{MPF102 - JFET VHF Amplifier N-Channel - Depletion}, MPF102/D, 2006 [Revised Jan. 2006].
+
+\bibitem{nds7002}
+ON Semiconductor, \textquote{N-Channel Enhancement Mode Field Effect Transistor - 2N7000, 2N7002, NDS7002A}, NDS7002A/D, 1998 [Revised Jan. 2022].
+
+\bibitem{infineon-note}
+V. Barkhordarian, \textquote{Power MOSFET Basics}, International Rectifier, 1997.
+
+\bibitem{lnd250}
+Microchip, \textquote{LND150/LND250 N-Channel Depletion-Mode DMOS FETs}, DS20005454A, 2018 [Revised Aug. 2018].
+
+\end{thebibliography}
+
+
+\end{document}

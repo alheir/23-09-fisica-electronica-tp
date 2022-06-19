@@ -1,0 +1,19 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+El circuito para analizar al dispositivo consiste en una resistencia de drain $R = 7k\Omega$, una fuente de entrada $V_{in} = -0.6$ y una fuente de salida $V_{CC} = 10V$. Simulando, se obtuvo el siguiente punto de trabajo: $Q = (V_{GS_Q} = -0.6V;\, V_{DS_Q}=1.26V;\, I_{DS_Q}=1.25mA)$.    
+
+% Simulando el circuito propuesto por la cátedra en el programa \textit{LTSpice} el punto Q obtenido es el siguiente: $V_{GS} = -0.6\,V$, $V_{DS} = 1.26\,V$ e $I_D = 1,25\,mA$.
+    
+\subsection{Curvas de entrada y salida}
+
+Al analizar la curva de entrada de la figura \ref{fig:MOSFETd-Plot}, se puede resaltar el hecho de que la tensión umbral ($V_{TH} = -2\,V$) cae dentro de los valores posibles que especifica el fabricante en la hoja de datos del componente ($-3\,V<V_{TH}<-1\,V$) \cite{lnd250}. También resulta fácil ver que el punto Q del circuito está en modo deplexión y que la curva simulada se condice con la teórica.
+
+La curva de entrada también está en gran acuerdo con la estudiada analíticamente ya que la $I_D$ prácticamente deja de variar cuando la $V_{DS}$ varía por encima de cierto valor. Si bien a primera vista puede parecer que el transistor esté operando región de saturación, un análisis más detallado muestra claramente que el punto de operación se encuentra en la zona de triodo.
+
+\subfile{../Plots/MOSFETd-Plot}
+
+\subsection{Parámetros del modelo de pequeña señal}
+Se considera el modelo de pequeña señal representado por una conductancia de entrada $g_m$ y una resistencia de salida $r_o$. Los mismos se obtienen de las curvas de entrada y salida en un entorno del punto Q: $g_m = \nicefrac{\partial I_D}{\partial V_{GS}} = 2,57\,\nicefrac{mA}{V}$, y $r_0=\nicefrac{\partial V_{DS}}{\partial I_D}=4635,68\,\Omega$.
+\end{document}
+%  gd = 0.000215718

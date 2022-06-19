@@ -1,0 +1,17 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+El circuito para analizar al dispositivo consiste en una resistencia de drain $R = 1060\Omega$, una fuente de entrada $V_{in} = -680mV$ y una fuente de salida $V_{CC} = 10\,V$. Simulando, se obtuvo el siguiente punto de trabajo: $Q = V_{GS_Q} = -680\,mV;\, V_{DS_Q}=4.54,3V;\, I_{DS_Q}=5.148'\,mA)$.
+
+\subsection{Curvas de entrada y salida}
+
+En la figura \ref{fig:mpf102-plot} se muestran las curvas de entrada y salida características, pudiendo ubicar la operación del transistor en la región de saturación. Se puede comprobar que la tensión de \emph{pinch-off} de \emph{gate} $V_P$ es cercana a $3\,V$, en concordancia con el valor $-2.9\,V$ del modelo de simulación. En particular, para $V_{GS} = 0\,V$, se obtuvo una $I_{DSS} = 8.772\,mA$, valor que se ubica dentro del rango especificado por el fabricante, entre $2\,mA$ y $20\,mA$ \cite{mpf102}.
+
+\subfile{../Plots/mpf102-plot}
+
+\subsection{Parámetros del modelo de pequeña señal}
+
+El modelo de pequeña señal es caracterizado por la transconductancia de entrada $g_m$ y por la resistencia de salida $r_o$, definidos ambos para un entorno del punto de polarización trabajado. A partir de la simulación, se obtuvo $g_m = 4.627\, \nicefrac{mA}{V}$ y $r_o = 98k453\,\Omega$.
+
+Al buscar los parámetros de pequeña señal en una hoja de datos \cite{mpf102}, se encontró que se especifican valores de admitancia de entrada y salida, siendo estos $800\mu S = 0.8\, \nicefrac{mA}{V}$ y $200\,\mu S$ ($5k\,\Omega$), respectivamente. Estos valores están dados para una señal de prueba de $100\,MHz$, siendo coherente con que el MPF102 está diseñado para amplificación \emph{Very High Frequency} ($30\,MHz$ - $300\,MHz$). Luego, los parámetros calculados ignoran las capacidades parásitas que se manifiestan a estas frecuencias, por lo que las diferencias con los tabulados son esperables.
+\end{document}

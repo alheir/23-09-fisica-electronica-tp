@@ -1,0 +1,40 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+                xlabel=$V_D (V)$,
+                ylabel=$I_D (mA)$, 
+                ymajorgrids=true,
+                xmajorgrids=true,
+                grid style=dashed,
+                label style={font=\scriptsize},
+                tick label style={font=\scriptsize},
+                width=0.9\columnwidth,
+                axis lines = center,
+            ]
+            \addplot[
+                    % Plot color:
+                    color = black,
+                    % Select axis rows:
+                    select coords between index={1}{200},
+                    filter discard warning=false, unbounded coords=discard
+                    ] 
+                    % Table Path and axis' columns (0 - N):
+                    table [x index=1, y expr = \thisrowno{2}*1e3]{src/Diode-IVPlot.txt};
+                    
+                    % Mark one point:
+                    \filldraw [red] 
+                            (0.546424, 0.000432386 * 1e3) 
+                            circle (2pt)
+                            node[anchor = east, color = black]{\scriptsize Q};
+
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Curva I-V del diodo 1N4148.}
+    \label{fig:1n4148-plot-iv}
+\end{figure}
+\end{document}

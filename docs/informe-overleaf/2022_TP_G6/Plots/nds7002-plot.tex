@@ -1,0 +1,96 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+                xmax=3, ymax = 2.5,
+                axis lines = center,
+                xmin = 0, ymin = 0,
+                % ymajorgrids=true,
+                grid style=dashed,
+                % extra y ticks={6},
+                % extra y tick labels={$6$},    
+                % extra y tick style={y tick label style={right, xshift=0.25em}},
+                xlabel=$V_{DS}(V)$,
+                ylabel=$I_D(mA)$, 
+                label style={font=\scriptsize},
+                tick label style={font=\scriptsize},
+                xlabel style={color = ForestGreen},
+                width=0.9\columnwidth
+            ]
+            % \node[] at (-1.20,0.45) {\scriptsize $V_{GS}(V)$};
+        
+             \addplot[
+                    color = gray,
+                    select coords between index={5}{180}
+                    ] 
+                    table [x index = 1, y expr = 1000 * \thisrow{Id(M1)}]{src/nds7002-exit.txt};
+            \node[text=gray] at (1,2.1) {\tiny $V_{GS} = 1.73V$};
+                    
+            \addplot[
+                    color = gray,
+                    select coords between index={184}{360}
+                    ] 
+                    table [x index = 1, y expr = 1000 * \thisrow{Id(M1)}]{src/nds7002-exit.txt};
+            \node[text=gray] at (1,0.9) {\tiny $V_{GS} = 1.65V$};
+            
+                    
+            \addplot[
+                    color = ForestGreen, thick,
+                    select coords between index={366}{540}
+                    ] 
+                    table [x index = 1, y expr = 1000 * \thisrow{Id(M1)}]{src/nds7002-exit.txt};
+            \node[text=ForestGreen] at (1,1.5) {\tiny $V_{GS} = 1.696V$};
+                
+            \addplot[
+                    color = gray,
+                    select coords between index={549}{721}
+                    ] 
+                    table [x index = 1, y expr = 1000 * \thisrow{Id(M1)}]{src/nds7002-exit.txt};
+            \node[text=gray] at (1,0.5) {\tiny $V_{GS} = 1.6V$};
+                    
+            \filldraw [ForestGreen] 
+                    (2.64911, 1.3866) 
+                    circle (2pt)
+                    node[anchor = north, color = ForestGreen]{\scriptsize Q};
+    \end{axis}
+    \begin{axis}[
+                % xmajorgrids=true,
+                % grid style=dashed,
+                xmax=2, ymax = 2.5,
+                xmin=1,
+                axis lines = center,
+                axis x line*=top,
+                yticklabels=\empty,
+                ymajorticks=false, 
+                % ytick={2,4,8},
+                % extra y ticks={6},
+                % extra y tick labels={$6$},    
+                % extra y tick style={y tick label style={right, xshift=0.25em}},
+                xlabel=$V_{GS}(V)$,
+                label style={font=\scriptsize},
+                tick label style={font=\scriptsize},
+                xlabel style={color = blue},
+                width=0.9\columnwidth
+            ]
+            % \node[] at (-1.20,0.45) {\scriptsize $V_{GS}(V)$};
+            
+            \addplot[
+                    color = blue, thick,
+                    select coords between index={1}{801}
+                    ] 
+                    table [x index=0, y expr = 1000 * \thisrow{Id(M1)}]{src/nds7002-entry.txt};
+
+            \filldraw [blue] 
+                    (1.6961, 1.3869) 
+                    circle (2pt)
+                    node[anchor = north west, color = blue]{\scriptsize Q};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Curvas características MOSFET(enrich) - N: NDS7002.}
+    \label{fig:nds7002-plot}
+\end{figure}
+\end{document}

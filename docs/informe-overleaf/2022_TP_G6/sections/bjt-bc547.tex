@@ -1,0 +1,24 @@
+\documentclass[../main.tex]{subfiles}
+
+\begin{document}
+El circuito propuesto por la cátedra consiste en una fuente de entrada $V_{in} = 603,6\,mV$ con una resistencia en la base $RB=220\,\Omega$y una fuente de salida $V_{cc} = 5\,V$ con una resistencia en el colector $RC=22,\,k\Omega$. Al simular se obtuvo el punto $Q = (V_{BE_Q} = 602mV;\, V_{CE_Q}=59.8mV;\, I_{C_Q}=216\mu A)$. 
+
+\subsection{Curvas de entrada y salida}
+En la figura \ref{fig:BJT-Plot}, es fácil ver que en la curva de salida el punto Q se ubica en la zona de saturación. Si se la observa con mayor detenimiento, se puede ver que la corriente $I_C$ reduce el aumento de corriente con respecto al de tensión. Por ende, se puede apreciar la existencia del efecto Early predicho teóricamente; también se entiende por qué se suele considerar a la $I_C$ prácticamente constante cuando el transistor entra en la zona activa.
+
+Por otro lado, analizando la curva de entrada, la misma se asemeja a la curva de un diodo, de acuerdo con lo esperado analíticamente. Además, llama la atención que la tensión $V_{BE_{ON}}$ del transistor ($V_{BE_{ON}} = 0,6\,V$) es ligera, pero apreciativamente, menor que la esperada en la mayoría de diodos ($V_{ON} = 0,7\,V$); la curva simulada coincide con la provista por el fabricante en la hoja de datos \cite{bc547b}, por lo que se puede asumir que dicha variación es debido al diseño del componente.
+
+\subfile{../Plots/BJT-Plot}
+
+\subsection{Análisis en pequeña señal}
+Como fue indicado, el punto Q del circuito dado se encuentra en la región de saturación, y, por lo tanto, no es óptimo para analizar el modelo de pequeña señal. Por este motivo, se redujo la resistencia del colector a $R_C=10k\Omega$ para conseguir que el circuito tenga su punto de operación en la región activa, y poder así utilizar el modelo de Giacoletto para realizar el análisis de pequeña señal. El nuevo punto de operación resultó ser $Q = \left(V_{BE_Q} = 603.4mV;\, V_{CE_Q}=2.32V;\, I_{C_Q}=268.07\mu A\right)$. En comparación con el anterior punto, se observa que la tensión $V_{CE}$ ahora se ubica prácticamente al $50\%$ de $V_{CC}$, por lo que tiene un rango más amplio de variación, tanto hacia abajo como hacia arriba, sin que el transistor entre en saturación o en corte, respectivamente. Los parámetros para el punto Q que determinan el modelo se obtienen de las pendientes de las curvas de entrada y salida del nuevo circuito, $g_m = \nicefrac{\partial I_C}{\partial V_{BE}} = 10,12\,\nicefrac{mA}{V}$ y $r_0=\nicefrac{\partial V_{CE}}{\partial I_C}=238,8\,k\Omega$, respectivamente; luego se puede calcular el parámetro faltante como $r_\pi=\nicefrac{\beta}{g_m}=28,9\,k\Omega$.
+
+% r0^(-1) = 4.20522e-006
+% B = 290.43
+
+En la figura \ref{fig:BJT-AC} se tienen curvas de salidas del transistor con distintas amplitudes de señal en la entrada, superpuesta a la tensión de polarización de la base $V_{in}$. Comparándolas, se aprecia que en los semiciclos positivos de la señal de mayor amplitud la $I_C$ se \emph{recorta}, al igual que lo hace la $V_{CE}$ en los semiciclos negativos. Esto se corresponde con la curva de entrada del transistor, la cual muestra que la corriente $I_C$ aumenta cuando la tensión $V_{BE}$ crece en mayor medida que disminuye cuando $V_{BE}$ decrece. Además, a partir de varios gráficos de la simulación se pudo corroborar que la tensión $V_{BE}$ se invierte en la salida  
+
+% En la figura \ref{fig:BJT-AC} se tienen curvas de salidas del transistor con distintas amplitudes de señal en la entrada, superpuesta a la tensión de polarización de la base $V_{in}$. Comparándolas, se aprecia que en los semiciclos positivos de la señal de mayor amplitud la corriente se limita, al igual que lo hace la tensión en los negativos. Susodicha observación se corresponde con la curva de entrada del transistor, la cual muestra que la corriente $I_C$ aumenta cuando la tensión $V_{BE}$ crece en mayor medida que disminuye cuando $V_{BE}$ decrece. Además varios gráficos de la simulación se pudo corroborar que la tensión $V_{BE}$ se invierte en la salida  
+
+\subfile{../Plots/BJT-AC}
+\end{document}
